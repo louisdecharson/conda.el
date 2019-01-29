@@ -165,12 +165,7 @@ environment variable."
 (defun conda--get-path-prefix (env-dir)
   "Get a platform-specific path string to utilize the conda env in ENV-DIR.
 It's platform specific in that it uses the platform's native path separator."
-  (s-trim (shell-command-to-string
-                (format "conda ..activate \"%s\" \"%s\""
-                        (if (eq system-type 'windows-nt)
-                            "cmd.exe"
-                          "bash")
-                        env-dir))))
+  (s-trim (concat (file-name-as-directory env-dir) "bin")))
 
 (defun conda-env-clear-history ()
   "Clear the history of conda environments that have been activated."
